@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Analytics 24 - 25</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="navbar">
+            <div class="logo">
+                <i class="fas fa-basketball-ball"></i> NBA Analytics 24 - 25 Season
+            </div>
+            <nav class="nav-links">
+                <a href="#dashboard" class="nav-link active" data-tab="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#compare" class="nav-link" data-tab="compare">
+                    <i class="fas fa-balance-scale"></i> Compare
+                </a>
+            </nav>
+        </header>
+
+        <main class="content">
+            <section id="dashboard" class="tab-content active">
+                <div class="dashboard-section hero-section">
+                    <div class="hero-left">
+                        <div class="hero-title">
+                            <i class="fas fa-basketball-ball icon-large"></i> NBA Analytics  24 - 25 Season
+                        </div>
+                        <p>
+                            Discover advanced calculated statistics and visuals beyond the capbility of standard sports sites like ESPN or the NBA. On our site you can compare two of the top 250 NBA players stats and see calulated visuals based on the most recent 2024-2025 season.
+                        </p>
+                        <button class="explore-btn" onclick="scrollToSection('dashboard-mid-section')">
+                            <i class="fas fa-chart-line"></i> EXPLORE ANALYTICS
+                        </button>
+                    </div>
+                    <div class="hero-right">
+                        <canvas id="shootingChart" width="300" height="300"></canvas>
+                    </div>
+                </div>
+
+                <div id="dashboard-mid-section" class="dashboard-section mid-section">
+                    <div class="card top-scorers-card">
+                        <div class="card-header">
+                            <i class="fas fa-trophy"></i> Top Scorers
+                        </div>
+                        <ul class="player-list">
+                            <li>
+                                <span class="player-name">Shai Gilgeous-Alexander</span>
+                                <span class="player-pos">PG</span>
+                                <span class="player-stat">32.7 <span class="stat-label">PPG</span></span>
+                            </li>
+                            <li>
+                                <span class="player-name">Giannis Antetokounmpo</span>
+                                <span class="player-pos">PF</span>
+                                <span class="player-stat">30.4 <span class="stat-label">PPG</span></span>
+                            </li>
+                            <li>
+                                <span class="player-name">Nikola Jokic</span>
+                                <span class="player-pos">C</span>
+                                <span class="player-stat">29.6 <span class="stat-label">PPG</span></span>
+                            </li>
+                            <li>
+                                <span class="player-name">Anthony Edwards</span>
+                                <span class="player-pos">SG</span>
+                                <span class="player-stat">27.6 <span class="stat-label">PPG</span></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card league-averages-card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line"></i> League Averages
+                        </div>
+                        <div class="average-grid">
+                            <div class="average-item">
+                                <i class="fas fa-basketball-ball"></i> 113.8 <span class="avg-label">PPG</span>
+                            </div>
+                            <div class="average-item">
+                                <i class="fas fa-bullseye"></i> 46.7% <span class="avg-label">FG%</span>
+                            </div>
+                            <div class="average-item">
+                                <i class="fas fa-dot-circle"></i> 36.0% <span class="avg-label">3P%</span>
+                            </div>
+                            <div class="average-item">
+                                <i class="fas fa-chart-line"></i> 78.0% <span class="avg-label">FT%</span>
+                            </div>
+                            <div class="average-item">
+                                <i class="fas fa-hand-rock"></i> 26.5 <span class="avg-label">APG</span>
+                            </div>
+                            <div class="average-item">
+                                <i class="fas fa-arrow-up"></i> 44.1 <span class="avg-label">RPG</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section team-standings-section">
+                    <div class="card standings-card">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i> Team Standings
+                            <div class="team-filters">
+                                <button class="filter-btn active" data-conference="ALL">ALL</button>
+                                <button class="filter-btn" data-conference="EAST">EAST</button>
+                                <button class="filter-btn" data-conference="WEST">WEST</button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table class="standings-table">
+                                <thead>
+                                    <tr>
+                                        <th>RANK</th>
+                                        <th>TEAM</th>
+                                        <th>RECORD</th>
+                                        <th>WIN %</th>
+                                        <th>PPG</th>
+                                        <th>OPP PPG</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="standingsTableBody">
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="compare" class="tab-content">
+                <div class="comparison-section comparison-intro-section">
+                    <div class="section-header">
+                        <i class="fas fa-balance-scale icon-large"></i> Player Comparison
+                        <p class="section-description">
+                            Compare any two NBA players with advanced analytics and side-by-side visualizations
+                        </p>
+                    </div>
+                    <div class="player-selection-inputs">
+                        <div class="player-input-card">
+                            <div class="player-label">Player 1</div>
+                            <input type="text" id="player1Search" placeholder="Search for a player..." list="player1-options">
+                            <div id="player1Selected" class="selected-player-tag" style="display: none;">
+                                <span class="player-name-tag"></span>
+                                <span class="player-pos-tag"></span>
+                                <i class="fas fa-times remove-player" data-player="1"></i>
+                            </div>
+                            <datalist id="player1-options"></datalist>
+                        </div>
+                        <div class="player-input-card">
+                            <div class="player-label">Player 2</div>
+                            <input type="text" id="player2Search" placeholder="Search for a player..." list="player2-options">
+                            <div id="player2Selected" class="selected-player-tag" style="display: none;">
+                                <span class="player-name-tag"></span>
+                                <span class="player-pos-tag"></span>
+                                <i class="fas fa-times remove-player" data-player="2"></i>
+                            </div>
+                            <datalist id="player2-options"></datalist>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-section popular-comparisons-section">
+                    <div class="section-header">
+                        <i class="fas fa-fire"></i> Popular Comparisons
+                    </div>
+                    <div class="popular-btns">
+                        <button class="popular-compare-btn" data-player1="Shai Gilgeous-Alexander" data-player2="Anthony Edwards">SHAI VS EDWARDS</button>
+                        <button class="popular-compare-btn" data-player1="Giannis Antetokounmpo" data-player2="Jayson Tatum">GIANNIS VS TATUM</button>
+                        <button class="popular-compare-btn" data-player1="Luka Doncic" data-player2="Nikola Jokic">LUKA VS JOKIC</button>
+                        <button class="popular-compare-btn" data-player1="Stephen Curry" data-player2="Damian Lillard">CURRY VS LILLARD</button>
+                    </div>
+                </div>
+                
+                <div class="comparison-section head-to-head-section" style="display: none;">
+                    <div class="section-header">Head-to-Head Comparison</div>
+                    <div class="comparison-table-container">
+                        <table class="head-to-head-table">
+                            <thead>
+                                <tr>
+                                    <th id="player1NameHeader">Player 1</th>
+                                    <th>STATISTIC</th>
+                                    <th id="player2NameHeader">Player 2</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparisonTableBody">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="comparison-section shooting-charts-section" style="display: none;">
+                    <div class="section-header">Percent of Made Shots</div>
+                    <div class="chart-container-compare">
+                        <div class="chart-card">
+    <div class="chart-header" id="player1ChartHeader">Player 1 Shooting</div>
+    <div class="chart-wrapper">
+        <canvas id="player1ShootingChart"></canvas>
+    </div>
+</div>
+<div class="chart-card">
+    <div class="chart-header" id="player2ChartHeader">Player 2 Shooting</div>
+    <div class="chart-wrapper">
+        <canvas id="player2ShootingChart"></canvas>
+    </div>
+</div>
+
+                </div>
+
+                <div class="bottom-description-section">
+                    <div class="logo-small">
+                        <i class="fas fa-basketball-ball"></i> NBA Analytics 
+                    </div>
+                    <p>Advanced NBA statistics and insights beyond traditional sports sites.</p>
+                    <p class="season-info">Calculation, visual representation and comparison, of NBA players stats for the 24-25 season.
+                        Credits: Basketball-Reference, Chart.js
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
