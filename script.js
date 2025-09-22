@@ -413,6 +413,24 @@ const playerStats = {
     },
     shooting: {}
   },
+    "Zion Williamson": {
+    pos: "PF",
+    stats: {
+      "Points per Game": 24.6,   // 737 ÷ 30
+      "Rebounds per Game": 7.2,  // 216 ÷ 30
+      "Assists per Game": 5.3,   // 159 ÷ 30
+      "Field Goal %": 56.7,
+      "Three Point %": 23.1,
+      "Free Throw %": 65.6
+    },
+    scoring: {
+      twoPoints: 570,   // (288 - 3) * 2
+      threePoints: 9,   // 3 * 3
+      ftPoints: 158,
+      totalPoints: 737
+    },
+    shooting: {}
+  },
   "Jalen Williams": {
     pos: "SG",
     stats: {
@@ -4840,4 +4858,5 @@ document.querySelectorAll('.popular-compare-btn').forEach(btn => {
         player2SelectedTag.querySelector('.player-name-tag').textContent = p2Name;
         player2SelectedTag.querySelector('.player-pos-tag').textContent = playerStats[p2Name].pos;
     });
+
 });
